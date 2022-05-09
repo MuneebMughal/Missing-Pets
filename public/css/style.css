@@ -10,15 +10,20 @@ html {
 }
 .section {
   padding-top: 70px;
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
+  min-width: 100vw;
   display: flex;
 }
+.first-img {
+  padding-top: 4rem;
+  min-height: 100%;
+  min-width: 50%;
+}
 .about-img {
-  height: 100%;
-  width: 50%;
-  background-image: url("/images/about-img.png");
-  background-size: cover;
+  min-height: 100%;
+  min-width: 50%;
+  background-image: url("/images/about-img-0.png");
+  background-size: contain;
   background-repeat: no-repeat;
   background-color: white;
 }
@@ -29,8 +34,8 @@ html {
   background-image: url("/images/report.jpeg");
 }
 .about {
-  height: 100%;
-  width: 50%;
+  min-height: 100%;
+  min-width: 50%;
   display: flex;
   flex-direction: column;
   padding: 10rem 4rem;
@@ -145,4 +150,163 @@ footer {
   align-items: center;
   background-color: #eb5353;
   color: white;
+  margin-top: 4rem;
+}
+@media only screen and (min-width: 960px) and (max-width: 1200px) {
+  .about {
+    padding: 6rem 3rem;
+  }
+  .about h1 {
+    font-size: 2.5rem;
+  }
+  .about p {
+    font-size: 1.2rem;
+  }
+  .report-btn {
+    padding: 25px;
+    font-size: 16px;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+  .about {
+    padding: 4rem 2.5rem;
+  }
+  .about h1 {
+    font-size: 2.5rem;
+  }
+  .about p {
+    font-size: 1.2rem;
+  }
+  .report-btn {
+    padding: 25px;
+    font-size: 16px;
+  }
+  .formbg {
+    max-width: 380px;
+  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 767px) {
+  .first-img {
+    display: none;
+  }
+  .about-img {
+    display: none;
+  }
+  .about {
+    min-height: 100%;
+    min-width: 100%;
+    padding: 4rem 3rem;
+  }
+  .about h1 {
+    font-size: 2.5rem;
+  }
+  .about p {
+    font-size: 1.2rem;
+  }
+  .report-btn {
+    padding: 25px;
+    font-size: 16px;
+  }
+  .report-form {
+    min-height: 100%;
+    min-width: 100%;
+  }
+  .formbg {
+    max-width: 400px;
+  }
+  .form-title {
+    font-size: 18px;
+    line-height: 25px;
+    padding-bottom: 12px;
+  }
+  .form-item {
+    padding-bottom: 20px;
+  }
+  .form-item label {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+  .form-item input {
+    font-size: 14px;
+    line-height: 25px;
+    padding: 6px 12px;
+    min-height: 38px;
+  }
+  .form-item textarea {
+    font-size: 14px;
+    line-height: 25px;
+    padding: 6px 12px;
+    min-height: 38px;
+  }
+  .form-item button {
+    font-size: 14px;
+    line-height: 25px;
+    padding: 6px 12px;
+    min-height: 38px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .first-img {
+    display: none;
+  }
+  .about-img {
+    display: none;
+  }
+  .about {
+    min-height: 100%;
+    min-width: 100%;
+    padding: 3rem 2rem;
+  }
+  .about h1 {
+    font-size: 2rem;
+  }
+  .about p {
+    font-size: 1rem;
+  }
+  .report-btn {
+    padding: 25px;
+    font-size: 16px;
+  }
+  .report-form {
+    min-height: 100%;
+    min-width: 100%;
+  }
+  .formbg {
+    max-width: 350px;
+  }
+  .form-title {
+    font-size: 18px;
+    line-height: 25px;
+    padding-bottom: 12px;
+  }
+  .form-item {
+    padding-bottom: 20px;
+  }
+  .form-item label {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+  .form-item input {
+    font-size: 14px;
+    line-height: 25px;
+    padding: 6px 12px;
+    min-height: 38px;
+  }
+  .form-item textarea {
+    font-size: 14px;
+    line-height: 25px;
+    padding: 6px 12px;
+    min-height: 38px;
+  }
+  .form-item button {
+    font-size: 14px;
+    line-height: 25px;
+    padding: 6px 12px;
+    min-height: 38px;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+}
+@media only screen and (min-width: 768px) and (max-width: 959px) {
 }

@@ -11,68 +11,124 @@ a {
   left: 0;
   height: 70px;
   width: 100%;
+  background-color: #eb5353;
+}
+.nav_container {
+  position: relative;
+  height: 100%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #eb5353;
   padding: 10px;
 }
-
 .logo {
   font-size: 1.6rem;
   color: white;
   padding-left: 20px;
+  width: 33%;
 }
-
-.hamburger {
-  padding-right: 20px;
-  cursor: pointer;
+.nav_items {
+  display: flex;
+  justify-content: space-between;
+  width: 67%;
+  position: relative;
 }
-
-.hamburger .line {
-  display: block;
-  width: 40px;
-  height: 5px;
-  margin-bottom: 10px;
-  background-color: black;
+.nav_item {
+  display: flex;
+  flex-direction: row;
 }
-
-.nav__link {
-  position: fixed;
-  width: 94%;
-  top: 5rem;
-  left: 18px;
-  background-color: lightblue;
+.nav_item a {
+  margin-right: 30px;
+  padding: 10px;
 }
-
-.nav__link a {
-  display: block;
-  text-align: center;
-  padding: 10px 0;
-}
-
-.nav__link a:hover {
+.nav_item a:hover {
   background-color: lightcoral;
 }
-
+.hamburger {
+  display: none;
+}
+.show {
+  display: flex !important;
+}
 .hide {
   display: none;
 }
-@media screen and (min-width: 600px) {
-  .nav__link {
-    display: block;
-    position: static;
-    width: auto;
-    margin-right: 20px;
-    background: none;
+.search {
+  margin-right: 20px;
+}
+.search input {
+  padding: 10px;
+}
+.search button {
+  padding: 10px;
+}
+@media only screen and (min-width: 960px) and (max-width: 1200px) {
+  a {
+    font-size: 1rem;
   }
-
-  .nav__link a {
-    display: inline-block;
-    padding: 15px 20px;
+  .logo {
+    font-size: 1.4rem;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+  a {
+    font-size: 1rem;
+  }
+  .logo {
+    font-size: 1.4rem;
+  }
+  .nav_item a {
+    margin-right: 20px;
+  }
+  .search {
+    margin-top: 8px;
+    margin-right: 8px;
+  }
+  .search input {
+    padding: 5px;
+    width: 120px;
+  }
+  .search button {
+    padding: 5px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .logo {
+    width: 50%;
+    font-size: 1.4rem;
   }
 
   .hamburger {
+    padding-right: 20px;
+    cursor: pointer;
+    display: block;
+  }
+
+  .hamburger .line {
+    display: block;
+    width: 40px;
+    height: 5px;
+    margin-bottom: 10px;
+    background-color: black;
+  }
+  .nav_items {
     display: none;
+    position: absolute;
+    width: 100%;
+    flex-direction: column;
+    top: 70px;
+    left: 0px;
+    z-index: 999;
+    background-color: #eb5353b4;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 3rem 0rem 4rem 0rem;
+  }
+  .search {
+    padding-top: 2rem;
+  }
+  .nav_item {
+    flex-direction: column;
   }
 }
