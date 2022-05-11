@@ -12,21 +12,16 @@
       <h1>Missing Pets</h1>
     </a>
     <div class="container">
-      <a href="/report/24">
+      <% reports.forEach(function(report) { %>
+      <a href="http://localhost:5001/report/<%= report.id %>">
         <div class="card">
-          <h2>Tommy</h2>
-          <h3>Dog</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus illo
-            est unde vel sunt cumque sint id tempora nam eius.
-          </p>
-          <ul>
-            <li>Istanbul, Turkey.</li>
-            <li>Istanbul, Turkey.</li>
-            <li>Istanbul, Turkey.</li>
-          </ul>
+          <h2><%= report.name %></h2>
+          <h3><%= report.animal %></h3>
+          <h3><%= report.location %></h3>
+          <p><%= report.description %></p>
         </div>
       </a>
+      <% }); %>
 
       <div class="card">
         <h2>Tommy</h2>

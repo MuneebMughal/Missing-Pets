@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-
-router.get("/", (req, res) => {
-  res.render("reports");
+const { getAllReports } = require("../controllers/reports");
+router.get("/", async (req, res) => {
+  const reports = await getAllReports();
+  res.render("reports", { reports: reports });
 });
 module.exports = router;
