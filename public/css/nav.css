@@ -60,9 +60,6 @@ a {
 .search input {
   padding: 10px;
 }
-.search button {
-  padding: 10px;
-}
 @media only screen and (min-width: 960px) and (max-width: 1200px) {
   a {
     font-size: 1rem;
@@ -88,9 +85,6 @@ a {
   .search input {
     padding: 5px;
     width: 120px;
-  }
-  .search button {
-    padding: 5px;
   }
 }
 @media only screen and (max-width: 768px) {

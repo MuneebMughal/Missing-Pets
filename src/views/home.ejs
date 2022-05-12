@@ -10,6 +10,7 @@
   </head>
   <body>
     <%- include('./partials/navbar.ejs') -%>
+    <div class="container" style="display: none" id="search-container"></div>
     <div class="section" id="home">
       <div class="about">
         <h1>Help pets to meet their owner 😊</h1>
@@ -39,36 +40,9 @@
         </p>
       </div>
     </div>
-    <div class="section" id="report">
-      <div class="report-form">
-        <div class="formbg">
-          <div class="form-title">Report Missing Pet</div>
-          <form id="report-from">
-            <div class="form-item">
-              <label>Name</label>
-              <input type="text" />
-            </div>
-            <div class="form-item">
-              <label>Animal</label>
-              <input type="text" />
-            </div>
-            <div class="form-item">
-              <label>Description</label>
-              <textarea rows="3"></textarea>
-            </div>
-            <div class="form-item">
-              <label>Location</label>
-              <input type="text" />
-            </div>
-            <div class="form-item">
-              <button type="button">Submit</button>
-            </div>
-          </form>
-        </div>
-      </div>
-      <div class="about-img"></div>
-    </div>
+
     <footer>© 2022 Missing Pets, Inc. All rights reserved.</footer>
     <script src="/js/nav.js"></script>
+    <script src="/js/search.js"></script>
   </body>
 </html>

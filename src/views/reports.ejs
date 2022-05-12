@@ -5,76 +5,68 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/reports.css" />
+    <link rel="stylesheet" href="/css/style.css" />
     <title>Reports</title>
   </head>
   <body>
     <a href="/">
-      <h1>Missing Pets</h1>
+      <h1 class="heading">Missing Pets</h1>
     </a>
-    <div class="container">
-      <% reports.forEach(function(report) { %>
-      <a href="http://localhost:5001/report/<%= report.id %>">
-        <div class="card">
-          <h2><%= report.name %></h2>
-          <h3><%= report.animal %></h3>
-          <h3><%= report.location %></h3>
-          <p><%= report.description %></p>
+    <div class="report-form-container">
+      <h1>Add New Report</h1>
+      <div class="section" id="report">
+        <div class="report-form">
+          <div class="formbg">
+            <div class="form-title">Report Missing Pet</div>
+            <div class="error" id="error"></div>
+            <div class="success" id="success"></div>
+            <form id="report-from">
+              <div class="form-item">
+                <label>Name</label>
+                <input type="text" id="name" />
+              </div>
+              <div class="form-item">
+                <label>Animal</label>
+                <input type="text" id="animal" />
+              </div>
+              <div class="form-item">
+                <label>Description</label>
+                <textarea rows="3" id="description"></textarea>
+              </div>
+              <div class="form-item">
+                <label>Location</label>
+                <input type="text" id="location" />
+              </div>
+              <div class="form-item">
+                <button type="button" id="formbtn">Submit</button>
+              </div>
+            </form>
+          </div>
         </div>
-      </a>
-      <% }); %>
-
-      <div class="card">
-        <h2>Tommy</h2>
-        <h3>Dog</h3>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus illo
-          est unde vel sunt cumque sint id tempora nam eius.
-        </p>
-        <ul>
-          <li>Istanbul, Turkey.</li>
-          <li>Istanbul, Turkey.</li>
-          <li>Istanbul, Turkey.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h2>Tommy</h2>
-        <h3>Dog</h3>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus illo
-          est unde vel sunt cumque sint id tempora nam eius.
-        </p>
-        <ul>
-          <li>Istanbul, Turkey.</li>
-          <li>Istanbul, Turkey.</li>
-          <li>Istanbul, Turkey.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h2>Tommy</h2>
-        <h3>Dog</h3>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus illo
-          est unde vel sunt cumque sint id tempora nam eius.
-        </p>
-        <ul>
-          <li>Istanbul, Turkey.</li>
-          <li>Istanbul, Turkey.</li>
-          <li>Istanbul, Turkey.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h2>Tommy</h2>
-        <h3>Dog</h3>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus illo
-          est unde vel sunt cumque sint id tempora nam eius.
-        </p>
-        <ul>
-          <li>Istanbul, Turkey.</li>
-          <li>Istanbul, Turkey.</li>
-          <li>Istanbul, Turkey.</li>
-        </ul>
+        <div class="about-img"></div>
       </div>
     </div>
+    <h1>Reports</h1>
+    <div class="container">
+      <% reports.forEach(function(report) { %>
+      <div>
+        <div class="card">
+          <a href="http://localhost:5001/report/<%= report.id %>">
+            <h2><span class="black">Name:</span> <%= report.name %></h2>
+            <h3><span class="black">Animal:</span> <%= report.animal %></h3>
+            <h3><span class="black">Location:</span> <%= report.location %></h3>
+            <h4><span class="black">Description</span></h4>
+            <p><%= report.description %></p>
+          </a>
+        </div>
+        <div class="buttons" id="<%= report.id %>">
+          <button class="btn upd updateBtn" >Update</button>
+          <button class="btn del deleteBtn">Delete</button>
+        </div>
+      </div>
+
+      <% }); %>
+    </div>
+    <script src="/js/form.js"></script>
   </body>
 </html>

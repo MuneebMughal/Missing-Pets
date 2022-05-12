@@ -2,7 +2,9 @@ const Report = require("../models/Reports");
 const Sighting = require("../models/Sightings");
 exports.getAllReports = async () => {
   let reports = {};
-  await Report.findAll().then((data) => {
+  await Report.findAll({
+    order: [["id", "DESC"]],
+  }).then((data) => {
     reports = data;
   });
   return reports;

@@ -12,17 +12,39 @@
       <h1>Missing Pets</h1>
     </a>
     <div class="container">
-      <div class="card">
-        <h2><%= report.name %></h2>
-        <h3><%= report.animal %></h3>
-        <h3><%= report.location %></h3>
-        <p><%= report.description %></p>
-        <ul>
-          <% sightings.forEach(function(sight) { %>
-            <li><%= sight.road_name %>, <%= sight.area  %></li>
+      <div>
+        <div class="card">
+          <h2><span class="black">Name:</span> <%= report.name %></h2>
+          <h3><span class="black">Animal:</span> <%= report.animal %></h3>
+          <h3><span class="black">Location:</span> <%= report.location %></h3>
+          <h4><span class="black">Description</span></h4>
+          <p><%= report.description %></p>
+          <ul>
+            <% sightings.forEach(function(sight) { %>
+            <li><%= sight.road_name %>, <%= sight.area %></li>
             <% }); %>
-        </ul>
+          </ul>
+        </div>
+        <button class="addbtn" id="addSightingBtn">Add Sighting</button>
+        <div class="formbg" style="display: none" id="sighting-form">
+          <div class="error" id="error"></div>
+          <div class="success" id="success"></div>
+          <form>
+            <div class="form-item">
+              <label>Road Name</label>
+              <input type="text" id="road-name" />
+            </div>
+            <div class="form-item">
+              <label>Area</label>
+              <input type="text" id="area" />
+            </div>
+            <div class="form-item" id="<%= report.id %>">
+              <button type="button" id="formbtn">Submit</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
+    <script src="/js/sightform.js"></script>
   </body>
 </html>
