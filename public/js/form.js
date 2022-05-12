@@ -65,7 +65,7 @@ function validateForm() {
 }
 function postReport() {
   const xhr = new XMLHttpRequest();
-  xhr.open("POST", "http://localhost:5001/api/report");
+  xhr.open("POST", "http://localhost:5000/api/report");
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.send(
     JSON.stringify({
@@ -111,7 +111,7 @@ function deleteReport(e) {
   const id = e.target.parentNode.getAttribute("id");
   if (window.confirm("Are you Sure?")) {
     const xhr = new XMLHttpRequest();
-    xhr.open("DELETE", `http://localhost:5001/api/report/${id}`);
+    xhr.open("DELETE", `http://localhost:5000/api/report/${id}`);
     xhr.send();
     xhr.onload = () => {
       location.reload();
@@ -124,7 +124,7 @@ function updateReport(e) {
 }
 function setFormData() {
   const xhr = new XMLHttpRequest();
-  xhr.open("GET", `http://localhost:5001/api/report/${Id}`);
+  xhr.open("GET", `http://localhost:5000/api/report/${Id}`);
   xhr.send();
   xhr.onload = function () {
     if (xhr.status === 200) {
@@ -160,7 +160,7 @@ function cancelUpdate() {
 }
 function updateReportForm() {
   const xhr = new XMLHttpRequest();
-  xhr.open("PUT", `http://localhost:5001/api/report/${Id}`);
+  xhr.open("PUT", `http://localhost:5000/api/report/${Id}`);
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.send(
     JSON.stringify({

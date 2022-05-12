@@ -8,7 +8,7 @@ searchbar.addEventListener("input", (e) => {
 
 function getAllReports() {
   const xhr = new XMLHttpRequest();
-  xhr.open("GET", "http://localhost:5001/api/reports");
+  xhr.open("GET", "http://localhost:5000/api/reports");
   xhr.send();
   xhr.onload = function () {
     if (xhr.status === 200) {
@@ -38,7 +38,7 @@ function renderSearchResult(val) {
       console.log(rep);
       searchContainer.innerHTML += `
           <div class="card">
-          <a href='http://localhost:5001/report/${rep.id}'>
+          <a href='http://localhost:5000/report/${rep.id}'>
             <h2><span class="black">Name:</span> ${rep.name}</h2>
             <h3><span class="black">Animal:</span> ${rep.animal}</h3>
             <h3><span class="black">Location:</span> ${rep.location}</h3>

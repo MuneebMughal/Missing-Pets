@@ -37,7 +37,7 @@ function validateForm() {
 }
 function postSighting() {
   const xhr = new XMLHttpRequest();
-  xhr.open("POST", `http://localhost:5001/api/sighting/${id}`);
+  xhr.open("POST", `http://localhost:5000/api/sighting/${id}`);
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.send(
     JSON.stringify({

@@ -10,7 +10,7 @@ const api = require("./src/routes/api");
 const app = express();
 
 // declations
-const port = 5001;
+const port = 5000;
 
 // database connection
 sequelize
