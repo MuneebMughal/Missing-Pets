@@ -1,104 +1,116 @@
-const Report = require("../models/Reports");
-const Sighting = require("../models/Sightings");
-exports.addReport = (req, res) => {
-  const report = req.body;
-  Report.create(report)
-    .then(() => {
-      res.status(200).json({
-        message: "Report added Successfully",
-      });
-    })
-    .catch((err) => {
-      res.status(400).json({
-        err,
-      });
-    });
-};
-exports.getAllReports = (req, res) => {
-  Report.findAll()
-    .then((data) => {
-      res.status(200).json({
-        data,
-      });
-    })
-    .catch((err) => {
-      res.status(400).json({
-        err,
-      });
-    });
-};
-exports.getReport = (req, res) => {
-  const { id } = req.params;
-  Report.findOne({
-    where: {
-      id: id,
-    },
-  })
-    .then((data) => {
-      res.status(200).json({
-        data,
-      });
-    })
-    .catch((err) => {
-      res.status(400).json({
-        err,
-      });
-    });
-};
-exports.deleteReport = (req, res) => {
-  const { id } = req.params;
-  Report.destroy({
-    where: {
-      id: id,
-    },
-  })
-    .then((deletedRecord) => {
-      if (deletedRecord === 1) {
-        res.status(200).json({ message: "Deleted successfully" });
+const { getAllReportPage, getReport,getSightings } = require("./reports.js");
+exports.addReport = (db, req, res) => {
+  const { name = "", animal = "", description = "", location = "" } = req.body;
+  db.run(
+    `INSERT INTO reports(name, animal, description, location) values (?, ?, ?, ?)`,
+    [name, animal, description, location],
+    (err) => {
+      if (err) {
+        return res.status(400).json({
+          message: "Something Went Wrong.",
+        });
       } else {
-        res.status(404).json({ message: "record not found" });
+        return res.status(200).json({
+          message: "Report inserted successfully.",
+        });
       }
-    })
-    .catch(function (error) {
-      res.status(400).json(error);
-    });
+    }
+  );
 };
-exports.updateReport = (req, res) => {
-  const { id } = req.params;
-  const { name, animal, description, location } = req.body;
-  Report.update(
-    {
-      name: name,
-      animal: animal,
-      description: description,
-      location: location,
-    },
-    { where: { id: id } }
-  )
-    .then(() => {
-      res.status(200).json({
-        message: "Report updated Successfully.",
+exports.getAllReports = (db, req, res) => {
+  db.all("SELECT * FROM reports", [], (err, data) => {
+    if (err) {
+      return res.status(400).json({
+        message: "Something Went Wrong.",
       });
-    })
-    .catch((err) => {
-      res.status(400).json({
-        err,
+    } else {
+      return res.status(200).json({
+        data,
       });
-    });
+    }
+  });
 };
-exports.addSighting = (req, res) => {
-  const sighting = req.body;
+exports.getReport = (db, req, res) => {
   const { id } = req.params;
-  sighting.report_id = id;
-  Sighting.create(sighting)
-    .then(() => {
-      res.status(200).json({
-        message: "Sighting added Successfully",
+  db.all(`SELECT * FROM reports WHERE id = ?`, [id], (err, data) => {
+    if (err) {
+      return res.status(400).json({
+        message: "Something Went Wrong.",
       });
-    })
-    .catch((err) => {
-      res.status(400).json({
-        err,
+    } else {
+      return res.status(200).json({
+        data: data[0],
       });
-    });
+    }
+  });
+};
+exports.deleteReport = (db, req, res) => {
+  const { id } = req.params;
+  db.run(`DELETE FROM reports WHERE id = ?`, [id], (err) => {
+    if (err) {
+      return res.status(400).json({
+        message: "Something Went Wrong.",
+      });
+    } else {
+      db.run(`DELETE FROM sightings WHERE report_id = ?`, [id], (err) => {
+        if (err) {
+          return res.status(400).json({
+            message: "Something Went Wrong.",
+          });
+        } else {
+          return res.status(200).json({
+            message: "Report deleted successfully.",
+          });
+        }
+      });
+    }
+  });
+};
+exports.updateReport = (db, req, res) => {
+  const { id } = req.params;
+  const { name = "", animal = "", description = "", location = "" } = req.body;
+  db.run(
+    `UPDATE reports SET name = ? , animal = ? , description = ?, location = ? WHERE id = ?`,
+    [name, animal, description, location, id],
+    (err) => {
+      if (err) {
+        return res.status(400).json({
+          message: "Something Went Wrong.",
+        });
+      } else {
+        return res.status(200).json({
+          message: "Report updated successfully.",
+        });
+      }
+    }
+  );
+};
+exports.addSighting = (db, req, res) => {
+  const { road_name = "", area = "" } = req.body;
+  const { id } = req.params;
+  db.run(
+    `INSERT INTO sightings(road_name, area, report_id) values (?, ?, ?)`,
+    [road_name, area, id],
+    (err) => {
+      if (err) {
+        return res.status(400).json({
+          message: "Something Went Wrong.",
+        });
+      } else {
+        return res.status(200).json({
+          message: "Sighting inserted successfully.",
+        });
+      }
+    }
+  );
+};
+exports.renderReports = async (db, req, res) => {
+  const reports = await getAllReportPage(db);
+  res.render("reports", { reports: reports });
+};
+exports.renderReport = async (db, req, res) => {
+  const { id } = req.params;
+  const report = await getReport(db, id);
+  const sightings = await getSightings(db, id);
+  res.render("report", { report: report, sightings: sightings });
 };

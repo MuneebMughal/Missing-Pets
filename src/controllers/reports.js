@@ -1,33 +1,34 @@
-const Report = require("../models/Reports");
-const Sighting = require("../models/Sightings");
-exports.getAllReports = async () => {
-  let reports = {};
-  await Report.findAll({
-    order: [["id", "DESC"]],
-  }).then((data) => {
-    reports = data;
+exports.getAllReportPage = async (db) => {
+  return new Promise(function (resolve, reject) {
+    db.all("SELECT * FROM reports", [], function (err, rows) {
+      if (err) {
+        return reject(err);
+      }
+      resolve(rows);
+    });
   });
-  return reports;
 };
-exports.getReport = async (id) => {
-  let report = {};
-  await Report.findOne({
-    where: {
-      id: id,
-    },
-  }).then((data) => {
-    report = data;
+exports.getReport = async (db, id) => {
+  return new Promise(function (resolve, reject) {
+    db.all("SELECT * FROM reports WHERE id = ?", [id], function (err, rows) {
+      if (err) {
+        return reject(err);
+      }
+      resolve(rows[0]);
+    });
   });
-  return report;
 };
-exports.getSightings = async (id) => {
-  let sightings = {};
-  await Sighting.findAll({
-    where: {
-      report_id: id,
-    },
-  }).then((data) => {
-    sightings = data;
+exports.getSightings = async (db, id) => {
+  return new Promise(function (resolve, reject) {
+    db.all(
+      "SELECT * FROM sightings WHERE report_id = ? ",
+      [id],
+      function (err, rows) {
+        if (err) {
+          return reject(err);
+        }
+        resolve(rows);
+      }
+    );
   });
-  return sightings;
 };

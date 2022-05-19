@@ -1,11 +1,17 @@
 // Importing packages
 const express = require("express");
 const bodyParser = require("body-parser");
-const home = require("./src/routes/home");
-const reports = require("./src/routes/reports");
-const report = require("./src/routes/report");
-const sequelize = require("./src/models/index");
-const api = require("./src/routes/api");
+const sqlite = require("sqlite3").verbose();
+const {
+  addReport,
+  deleteReport,
+  getAllReports,
+  renderReports,
+  renderReport,
+  addSighting,
+  updateReport,
+  getReport,
+} = require("./src/controllers/report");
 // initializing app
 const app = express();
 
@@ -13,14 +19,19 @@ const app = express();
 const port = 5000;
 
 // database connection
-sequelize
-  .sync()
-  .then(() => {
-    console.log("Database Connected");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+
+const db = new sqlite.Database(
+  "./database.db",
+  sqlite.OPEN_READWRITE,
+  (err) => {
+    if (err) console.error(err.message);
+    else console.log("Database Connected");
+  }
+);
+
+// creating tables
+// db.run('CREATE TABLE reports(id INTEGER PRIMARY KEY AUTOINCREMENT, name, animal, description, location)');
+// db.run('CREATE TABLE sightings(id INTEGER PRIMARY KEY AUTOINCREMENT, road_name, area, report_id INTEGER, CONSTRAINT fk_reports FOREIGN KEY (report_id) REFERENCES reports(id) ON DELETE CASCADE)');
 
 // middlewares
 app.use(bodyParser.json());
@@ -35,10 +46,19 @@ app.set("views", "src/views");
 app.set("view engine", "ejs");
 
 // routes
-app.use("/", home);
-app.use("/reports", reports);
-app.use("/report", report);
-app.use("/api", api);
+app.get("/", (req, res) => {
+  res.render("home");
+});
+app.get("/reports", (req, res) => renderReports(db, req, res));
+app.get("/report/:id", (req, res) => renderReport(db, req, res));
+app.post("/api/report", (req, res) => addReport(db, req, res));
+app.delete("/api/report/:id", (req, res) => deleteReport(db, req, res));
+app.get("/api/reports", (req, res) => {
+  getAllReports(db, req, res);
+});
+app.put("/api/report/:id", (req, res) => updateReport(db, req, res));
+app.get("/api/report/:id", (req, res) => getReport(db, req, res));
+app.post("/api/sighting/:id", (req, res) => addSighting(db, req, res));
 
 // server
 app.listen(port, () => {
